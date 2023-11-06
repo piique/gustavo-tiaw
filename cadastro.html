@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CRUD </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='reset.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+
+    <header class="header-cadastro">
+        <img src="assets/logo.png" />
+        <h1>Página de Cadastro Professores</h1>
+    </header>
+
+    <div class="container">
+        <form class="form" id="cadastroForm">
+            <div class="form-fields">
+                <div class="input-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+                </div>
+                <div class="input-group">
+                    <label for="link-teams">Link Teams:</label>
+                    <input type="text" id="link-teams" name="link-teams" placeholder="Digite seu link do teams">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite seu email">
+                </div>
+                <div class="input-group">
+                    <label for="link-discord">Link Discord:</label>
+                    <input type="text" id="link-discord" name="link-discord" placeholder="Digite seu link do discord">
+                </div>
+                <div class="input-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                </div>
+                <div class="input-group">
+                    <label for="link-skype">Link Skype:</label>
+                    <input type="text" id="link-skype" name="link-skype" placeholder="Digite seu link do skype">
+                </div>
+                <div class="input-group">
+                    <label for="idioma">Idioma:</label>
+                    <input type="text" id="idioma" name="idioma" placeholder="Digite seu idioma">
+                </div>
+                <div class="input-group">
+                    <label for="imagem-perfil">Imagem de Perfil:</label>
+                    <input type="file" id="imagem-perfil" name="imagem-perfil" accept="image/*">
+                    <span id="file-size-warning" style="color: red; display: none;">O arquivo deve ser menor que
+                        2MB!</span>
+                </div>
+                <div class="input-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" placeholder="Digite seu telefone">
+                </div>
+                <div class="input-group">
+                    <label for="descricao-pessoal">Descrição Pessoal:</label>
+                    <textarea type="text" id="descricao-pessoal" name="descricao-pessoal"
+                        placeholder="Digite sua descrição pessoal"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="link-meet">Link Meet:</label>
+                    <input type="text" id="link-meet" name="link-meet" placeholder="Digite seu link do meet">
+                </div>
+                <div class="input-group">
+                    <label for="descricao-aula">Descrição de aula:</label>
+                    <textarea type="text" id="descricao-aula" name="descricao-aula"
+                        placeholder="Digite sua descrição de aula"></textarea>
+                </div>
+            </div>
+            <div class="save-button-wrapper">
+                <button type="submit" id="btnSalvar">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+    <script src='main.js'></script>
+</body>
+
+</html>
