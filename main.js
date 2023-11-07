@@ -1,6 +1,5 @@
 
-// Devine o limite de upload de imagem para no maximo 2MB (para não estourar local storage)
-document.getElementById('imagem-perfil').addEventListener('change', function() {
+document.getElementById('imagemPerfil').addEventListener('change', function() {
     var fileSize = this.files[0].size / 1024 / 1024;
     var limit = 2;
     if (fileSize > limit) {
@@ -11,43 +10,70 @@ document.getElementById('imagem-perfil').addEventListener('change', function() {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Selecione o formulário pelo seu ID e adicione um ouvinte de evento `submit`
-    document.getElementById('cadastroForm').addEventListener('submit', function(event) {
-        // Previna o comportamento padrão do formulário, que é recarregar a página
-        event.preventDefault();
-        salvarCadastro();
-    });
+function salvarCadastro(e) {
+    e.preventDefault();
 
-    // // Carrega os dados de cadastro quando a página é carregada
-    // carregarCadastro();
-});
 
-function salvarCadastro() {
-    var fileInput = document.getElementById('imagem-perfil');
+    var form = document.querySelector('#cadastroForm');
+    if (!form.checkValidity()) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+
+    var fileInput = document.getElementById('imagemPerfil');
     var file = fileInput.files[0];
 
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        var cadastro = {
-            nome: document.getElementById('nome').value,
-            nome: document.getElementById('nome').value,
-            linkTeams: document.getElementById('link-teams').value,
-            email: document.getElementById('email').value,
-            linkDiscord: document.getElementById('link-discord').value,
-            senha: document.getElementById('senha').value,
-            linkSkype: document.getElementById('link-skype').value,
-            idioma: document.getElementById('idioma').value,
-            telefone: document.getElementById('telefone').value,
-            descricaoPessoal: document.getElementById('descricao-pessoal').value,
-            linkMeet: document.getElementById('link-meet').value,
-            descricaoAula: document.getElementById('descricao-aula').value,
-            imagemPerfil: e.target.result
+
+    if (file && fileInput.checkValidity()) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var cadastro = {
+                nome: document.getElementById('nome').value,
+                linkTeams: document.getElementById('linkTeams').value,
+                email: document.getElementById('email').value,
+                linkDiscord: document.getElementById('linkDiscord').value,
+                senha: document.getElementById('senha').value,
+                linkSkype: document.getElementById('linkSkype').value,
+                idioma: document.getElementById('idioma').value,
+                imagemPerfil: e.target.result,
+                telefone: document.getElementById('telefone').value,
+                descricaoPessoal: document.getElementById('descricaoPessoal').value,
+                linkMeet: document.getElementById('linkMeet').value,
+                descricaoAula: document.getElementById('descricaoAula').value
+            };
+
+        
+            localStorage.setItem('cadastro', JSON.stringify(cadastro));
+
+        
+            alert('Cadastro salvo com sucesso!');
+            window.location.href = '/editar-perfil';
         };
-
-        // Salve os dados no localStorage, incluindo a imagem em base64
-        localStorage.setItem('cadastro', JSON.stringify(cadastro));
-
-        alert('Cadastro salvo com sucesso!\n JSON salvo no localStorage: \n' + JSON.stringify(cadastro));
-    };
+        reader.readAsDataURL(file);
+    } else {
+        alert('Por favor, selecione uma imagem para o perfil.');
+    }
 }
+
+document.getElementById('imagemPerfil').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+
+   
+    if (file && file.size <= 2 * 1024 * 1024) {
+        document.getElementById('file-size-warning').style.display = 'none';
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var base64Image = e.target.result;
+           
+            document.getElementById('imagemDoPerfil').src = base64Image;
+        };
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById('file-size-warning').style.display = 'block';
+        this.value = '';
+    }
+});
+
+document.querySelector('#cadastroForm').addEventListener('submit', salvarCadastro);
+
